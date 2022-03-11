@@ -1,4 +1,5 @@
 btree
+static_btree
 out
 
 *.o
