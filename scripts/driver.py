@@ -46,10 +46,11 @@ if __name__ == "__main__":
     offset = 0
     if len(sys.argv) == 2:
         offset = int(sys.argv[1])
-    u_data = measure('static_btree', offset, 0)
-    k_data = measure('static_btree', offset, 1)
-    X = u_data[0]
-    Y = [u_data[1], k_data[1]]
+    v1_data = measure('static_btree', offset, 0)
+    v2_data = measure('static_btree', offset, 1)
+    v3_data = measure('static_btree', offset, 2)
+    X = v1_data[0]
+    Y = [v1_data[1], v2_data[1], v3_data[1]]
     fig, ax = plt.subplots(1, 1, sharey = True)
     ax.set_title('search performance', fontsize = 16)
     ax.set_xlabel(r'$2^N$ array size', fontsize = 16)
@@ -57,6 +58,7 @@ if __name__ == "__main__":
     
     ax.plot(X, Y[0], marker = '*', markersize = 3, label = 'S-tree')
     ax.plot(X, Y[1], marker = '+', markersize = 7, label = 'S-tree + hugepage')
+    ax.plot(X, Y[2], marker = 'x', markersize = 3, label = 'S-tree + hugepage + optimize')
     ax.legend(loc = 'upper left')
     
     plt.show()
